@@ -10,8 +10,6 @@ import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 import org.json.JSONObject;
 
-import static java.lang.Thread.sleep;
-
 public class LichessRequest implements Requester {
     private final Client client = ClientBuilder.newClient();
     private final WebTarget target = client.target(getBaseURI());

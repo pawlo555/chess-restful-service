@@ -1,6 +1,6 @@
-package service.rest;
+package com.rest;
 
-import service.rest.model.Todo;
+import com.rest.model.Todo;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
@@ -54,7 +54,7 @@ public class TodosResource {
         }
         TodoDao.getModel().put(id, todo);
 
-        servletResponse.sendRedirect("../index.html");
+        servletResponse.sendRedirect("../rest/hello");
     }
 
     @Path("{todo}")

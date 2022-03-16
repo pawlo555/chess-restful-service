@@ -1,4 +1,4 @@
-package service.rest.model;
+package com.rest.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

@@ -1,6 +1,6 @@
-package service.rest;
+package com.rest;
 
-import service.rest.model.Todo;
+import com.rest.model.Todo;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;

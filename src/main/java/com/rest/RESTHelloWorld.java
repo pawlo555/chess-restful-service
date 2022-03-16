@@ -1,4 +1,4 @@
-package service.rest;
+package com.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -23,8 +23,10 @@ public class RESTHelloWorld {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public String sayHtmlHello() {
+        String values = TodoDao.getModel().values().toString();
         return "<html> " + "<title>" + "Hello Jersey" + "</title>"
-                + "<body><h1>" + "Hello Jersey" + "</body></h1>" + "</html> ";
+                + "<body><h1>" + "Hello Jersey" + "</body></h1>" +
+                "<p>" + values + "</p>"  +"</html> ";
     }
 }
 

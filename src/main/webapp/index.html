@@ -1,47 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="EN">
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
 </head>
 <body>
-<form action="rest/todos" method="POST">
-    <label>ID</label>
-    <input name="id" />
+<form action="rest/chess_request" method="POST">
+    <label>Username from lichess.com:</label>
+    <label>
+        <input name="firstId" />
+    </label>
     <br/>
-    <label>Summary</label>
-    <input name="summary" />
+    <label>Username from chess.com :</label>
+    <label>
+        <input name="secondId" />
+    </label>
     <br/>
-    Description:
-    <TEXTAREA NAME="description" COLS=40 ROWS=6></TEXTAREA>
+    <label> How many games from lichess.com:</label>
+    <label>
+        <input name="lichessGames" />
+    </label>
     <br/>
-    <input type="submit" value="Submit" />
-</form>
-</body>
-</html>
-
-<!--
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-</head>
-<body>
-<form action="rest/request" method="POST">
-    <label for="firstId">Username from lichess.com:</label>
-    <input name="firstId" />
-    <br/>
-    <label for="secondId">Username from chess.com :</label>
-    <input name="secondId" />
-    <br/>
-    <label for="lichessGames"> How many games from lichess.com:</label>
-    <input name="lichessGames" />
-    <br/>
-    <label for="chesscomGames"> How many games from chess.com:</label>
-    <input name="chesscomGames" />
+    <label> How many games from chess.com:</label>
+    <label>
+        <input name="chesscomGames" />
+    </label>
     <br/>
     <input type="submit" value="Submit" />
 </form>
 </body>
-</html>-->

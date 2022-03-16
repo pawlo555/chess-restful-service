@@ -12,6 +12,7 @@ public class PlayerInfo {
     private int blitzRanking;
     private int rapidRanking;
     private boolean isOnline;
+    private boolean completed = false;
 
     public PlayerInfo() {}
 
@@ -104,5 +105,13 @@ public class PlayerInfo {
 
     public String getUrl() {
         return url;
+    }
+
+    public void setCompleted() {
+        this.completed = true;
+    }
+
+    public boolean isCompleted() {
+        return this.completed;
     }
 }

@@ -1,6 +1,5 @@
 package com.rest.services;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.rest.model.PlayerInfo;
 
 import javax.ws.rs.client.Client;
@@ -23,6 +22,13 @@ public class LichessRequest implements Requester {
         playerInfo.setUrl(json.getString("url"));
         playerInfo.setCreationDate(json.getLong("createdAt"));
         playerInfo.setLastOnlineDate(json.getLong("seenAt"));
+        playerInfo.setOnline(json.getBoolean("online"));
+        playerInfo.setNumberOfPlayedGames(json.getJSONObject("count").getInt("all"));
+        JSONObject perfs = json.getJSONObject("perfs");
+        playerInfo.setBulletRanking(perfs.getJSONObject("bullet").getInt("rating"));
+        playerInfo.setBlitzRanking(perfs.getJSONObject("blitz").getInt("rating"));
+        playerInfo.setRapidRanking(perfs.getJSONObject("rapid").getInt("rating"));
+        playerInfo.setCompleted();
         return playerInfo;
     }
 

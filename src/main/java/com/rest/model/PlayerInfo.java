@@ -15,6 +15,10 @@ public class PlayerInfo {
 
     public PlayerInfo() {}
 
+    public PlayerInfo(String nickname) {
+        this.nickname = nickname;
+    }
+
     @Override
     public String toString() {
         return "PlayerInfo{" +

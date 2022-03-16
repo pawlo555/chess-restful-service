@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface Requester {
 
-    PlayerInfo getPlayerInfo();
+    PlayerInfo getPlayerInfo(String playerNick);
     //List<GameInfo> getGamesInfo();
 }

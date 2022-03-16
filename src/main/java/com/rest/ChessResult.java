@@ -47,7 +47,7 @@ public class ChessResult {
         return "<tr>" +
                 "<th scope=\"row\"> Link: </th>" +
                 "<td>" + "<a href=\""+ StaticData.firstPlayerInfo.getUrl() + "\">click</a></td>" +
-                "<td>" + "<a href=\""+ StaticData.firstPlayerInfo.getUrl() + "\">click</a></td>" +
+                "<td>" + "<a href=\""+ StaticData.secondPlayerInfo.getUrl() + "\">click</a></td>" +
                 "</tr>";
     }
 

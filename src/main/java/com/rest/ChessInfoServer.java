@@ -1,5 +1,7 @@
 package com.rest;
 
+import com.rest.services.MockRequester;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -24,8 +26,15 @@ public class ChessInfoServer {
     @POST
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void processRequest(@Context HttpServletResponse servletResponse) throws IOException {
-        System.out.println("Jestem w metodzie");
+    public void processRequest(@Context HttpServletResponse servletResponse) throws IOException, InterruptedException {
+        MockRequester firstRequester = new MockRequester();
+        MockRequester secondRequester = new MockRequester();
+        RequestThread firstThread = new RequestThread(firstRequester, 1);
+        RequestThread secondThread = new RequestThread(secondRequester, 2);
+        firstThread.start();
+        secondThread.start();
+        firstThread.join();
+        secondThread.join();
         servletResponse.sendRedirect("../rest/result");
     }
 }

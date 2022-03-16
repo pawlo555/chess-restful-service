@@ -7,7 +7,7 @@ public class GameInfo {
     private String whitePlayerNick;
     private String blackPlayerNick;
     private String result;
-    private URL gameURL;
+    private String gameURL;
 
     public GameInfo() {}
 

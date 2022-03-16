@@ -14,6 +14,7 @@ public class ChessResult {
         return "<html> <title> Results </title>"
                 + "<body>" +
                 "<h1>" + "Results" + "</h1>" +
+                errorsOccurred() +
                 "<table>" +
                 "<tr> <th></th>" +
                 "<th scope=\"col\"> Lichess.com </th>" +
@@ -33,6 +34,19 @@ public class ChessResult {
                 StaticData.secondPlayerInfo +
                 "</body>" +
                 "</html> ";
+    }
+
+    private String errorsOccurred() {
+        String errors = "";
+        if (!StaticData.firstPlayerInfo.isCompleted()) {
+            errors = errors + "An error occurred and data for user " +
+                    StaticData.firstPlayerInfo.getNickname() + " may be incomplete.</br>";
+        }
+        if (!StaticData.secondPlayerInfo.isCompleted()) {
+            errors = errors + "An error occurred and data for user " +
+                    StaticData.firstPlayerInfo.getNickname() + " may be incomplete.</br>";
+        }
+        return errors;
     }
 
     private String getIdLine() {

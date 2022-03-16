@@ -20,7 +20,7 @@ public class ChessInfoServer {
     @Context
     Request request;
 
-
+    private final static int TIMEOUT_MILLIS = 2000;
 
     @POST
     @Produces(MediaType.TEXT_HTML)
@@ -35,8 +35,9 @@ public class ChessInfoServer {
         RequestThread secondThread = new RequestThread(secondRequester, 2, secondId);
         firstThread.start();
         secondThread.start();
-        firstThread.join();
-        secondThread.join();
+        firstThread.join(TIMEOUT_MILLIS);
+        secondThread.join(1);
         servletResponse.sendRedirect("../rest/result");
+
     }
 }

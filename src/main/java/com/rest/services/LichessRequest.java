@@ -10,6 +10,8 @@ import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 import org.json.JSONObject;
 
+import static java.lang.Thread.sleep;
+
 public class LichessRequest implements Requester {
     private final Client client = ClientBuilder.newClient();
     private final WebTarget target = client.target(getBaseURI());
@@ -17,8 +19,30 @@ public class LichessRequest implements Requester {
     @Override
     public PlayerInfo getPlayerInfo(String playerNick) {
         PlayerInfo playerInfo = new PlayerInfo(playerNick);
-        JSONObject json = new JSONObject(target.path("user").path(playerNick).request()
-                .accept(MediaType.APPLICATION_JSON).get(String.class));
+        try {
+            JSONObject json = performRequest(playerNick);
+            updateUserProfile(json, playerInfo);
+            playerInfo.setCompleted();
+        }
+        catch(Exception e) {
+            System.out.println("An error occurred");
+            System.out.println(e.getMessage());
+        }
+        return playerInfo;
+    }
+
+    private static URI getBaseURI() {
+        return UriBuilder.fromUri("https://lichess.org/api").build();
+    }
+
+    private JSONObject performRequest(String playerNick) {
+        return new JSONObject(target.path("user").path(playerNick)
+                .request()
+                .accept(MediaType.APPLICATION_JSON)
+                .get(String.class));
+    }
+
+    private void updateUserProfile(JSONObject json, PlayerInfo playerInfo) {
         playerInfo.setUrl(json.getString("url"));
         playerInfo.setCreationDate(json.getLong("createdAt"));
         playerInfo.setLastOnlineDate(json.getLong("seenAt"));
@@ -28,11 +52,7 @@ public class LichessRequest implements Requester {
         playerInfo.setBulletRanking(perfs.getJSONObject("bullet").getInt("rating"));
         playerInfo.setBlitzRanking(perfs.getJSONObject("blitz").getInt("rating"));
         playerInfo.setRapidRanking(perfs.getJSONObject("rapid").getInt("rating"));
-        playerInfo.setCompleted();
-        return playerInfo;
-    }
-
-    private static URI getBaseURI() {
-        return UriBuilder.fromUri("https://lichess.org/api").build();
     }
 }
+
+

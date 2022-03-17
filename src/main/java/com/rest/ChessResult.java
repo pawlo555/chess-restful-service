@@ -44,7 +44,7 @@ public class ChessResult {
         }
         if (!StaticData.secondPlayerInfo.isCompleted()) {
             errors = errors + "An error occurred and data for user " +
-                    StaticData.firstPlayerInfo.getNickname() + " may be incomplete.</br>";
+                    StaticData.secondPlayerInfo.getNickname() + " may be incomplete.</br>";
         }
         return errors;
     }

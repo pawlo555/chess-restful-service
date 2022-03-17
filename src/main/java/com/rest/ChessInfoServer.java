@@ -1,7 +1,7 @@
 package com.rest;
 
+import com.rest.services.ChesscomRequester;
 import com.rest.services.LichessRequest;
-import com.rest.services.MockRequester;
 import com.rest.services.Requester;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,13 +30,19 @@ public class ChessInfoServer {
             @FormParam("secondId") String secondId,
             @Context HttpServletResponse servletResponse) throws IOException, InterruptedException {
         Requester firstRequester = new LichessRequest();
-        Requester secondRequester = new MockRequester();
+        Requester secondRequester = new ChesscomRequester();
         RequestThread firstThread = new RequestThread(firstRequester, 1, firstId);
         RequestThread secondThread = new RequestThread(secondRequester, 2, secondId);
         firstThread.start();
         secondThread.start();
+        long currentTime = System.currentTimeMillis();
         firstThread.join(TIMEOUT_MILLIS);
-        secondThread.join(1);
+        long afterFirstJoin = System.currentTimeMillis();
+        long toWait = TIMEOUT_MILLIS + currentTime - afterFirstJoin;
+        if (toWait <= 0) {
+            toWait = 1;
+        }
+        secondThread.join(toWait);
         servletResponse.sendRedirect("../rest/result");
 
     }

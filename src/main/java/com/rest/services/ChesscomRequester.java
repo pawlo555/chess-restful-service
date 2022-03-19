@@ -2,6 +2,7 @@ package com.rest.services;
 
 import com.rest.model.GameInfo;
 import com.rest.model.PlayerInfo;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.ws.rs.client.Client;
@@ -10,6 +11,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChesscomRequester implements Requester {
@@ -38,7 +40,52 @@ public class ChesscomRequester implements Requester {
 
     @Override
     public List<GameInfo> getGamesInfo(String playerNick, int numberOfGames) {
-        return null;
+        List<GameInfo> gameInfos = new ArrayList<>();
+        JSONArray games = performGamesRequest(playerNick);
+        if (games.length() < numberOfGames) {
+            System.out.println("To few games from chess.com");
+        }
+        for (int i=0; i<games.length(); i++) {
+            gameInfos.add(getGameInfo(games.getJSONObject(i)));
+        }
+        return gameInfos;
+    }
+
+    public GameInfo getGameInfo(JSONObject gameJson) {
+        GameInfo gameInfo = new GameInfo();
+        gameInfo.setGameURL(gameJson.getString("url"));
+        gameInfo.setWhitePlayerNick(gameJson.getJSONObject("white").getString("username"));
+        gameInfo.setBlackPlayerNick(gameJson.getJSONObject("black").getString("username"));
+        gameInfo.setResult(getResult(gameJson));
+        return gameInfo;
+    }
+
+    private String getResult(JSONObject gameJson) {
+        if (gameJson.getJSONObject("white").getString("result").equals("win")) {
+            return "1 - 0";
+        }
+        else if (gameJson.getJSONObject("black").getString("result").equals("win")) {
+            return "0 - 1";
+        }
+        else {
+            return "0.5 - 0.5";
+        }
+    }
+
+    private JSONArray performGamesRequest(String playerNick) {
+        JSONObject reply = new JSONObject(target.path(playerNick)
+                .path("games")
+                .path("archives")
+                .request()
+                .accept(MediaType.APPLICATION_JSON)
+                .get(String.class));
+        JSONArray jsonArray = reply.getJSONArray("archives");
+        String archivesPath = jsonArray.getString(jsonArray.length()-1);
+        JSONObject gamesReply = new JSONObject(client.target(archivesPath)
+                .request()
+                .accept(MediaType.APPLICATION_JSON)
+                .get(String.class));
+        return gamesReply.getJSONArray("games");
     }
 
     private JSONObject performGeneralRequest(String playerNick) {

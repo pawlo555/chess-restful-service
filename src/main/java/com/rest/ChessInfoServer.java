@@ -33,7 +33,7 @@ public class ChessInfoServer {
             @FormParam("secondGames") String secondGames,
             @Context HttpServletResponse servletResponse) throws IOException, InterruptedException {
         Requester firstRequester = new LichessRequest();
-        Requester secondRequester = new MockRequester();
+        Requester secondRequester = new ChesscomRequester();
         System.out.println("Games");
         System.out.println(firstGames);
         System.out.println(secondGames);

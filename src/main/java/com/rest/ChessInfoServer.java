@@ -2,7 +2,6 @@ package com.rest;
 
 import com.rest.services.ChesscomRequester;
 import com.rest.services.LichessRequest;
-import com.rest.services.MockRequester;
 import com.rest.services.Requester;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +20,7 @@ public class ChessInfoServer {
     @Context
     Request request;
 
-    private final static int TIMEOUT_MILLIS = 2000;
+    private final static int TIMEOUT_MILLIS = 4000;
 
     @POST
     @Produces(MediaType.TEXT_HTML)

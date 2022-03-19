@@ -21,15 +21,10 @@ public class LichessRequest implements Requester {
     @Override
     public PlayerInfo getPlayerInfo(String playerNick) {
         PlayerInfo playerInfo = new PlayerInfo(playerNick);
-        try {
-            JSONObject json = performRequest(playerNick);
-            updateUserProfile(json, playerInfo);
-            playerInfo.setCompleted();
-        }
-        catch(Exception e) {
-            System.out.println("An error occurred");
-            System.out.println(e.getMessage());
-        }
+
+        JSONObject json = performRequest(playerNick);
+        updateUserProfile(json, playerInfo);
+
         return playerInfo;
     }
 

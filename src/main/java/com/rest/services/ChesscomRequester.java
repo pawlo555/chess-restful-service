@@ -22,19 +22,14 @@ public class ChesscomRequester implements Requester {
     @Override
     public PlayerInfo getPlayerInfo(String playerNick) {
         PlayerInfo playerInfo = new PlayerInfo(playerNick);
-        try {
-            JSONObject generalJson = performGeneralRequest(playerNick);
-            System.out.println(generalJson);
-            updateGeneralProfile(generalJson, playerInfo);
-            JSONObject statsJson = performStatsRequest(playerNick);
-            System.out.println(statsJson);
-            updateStatsProfile(statsJson, playerInfo);
-            playerInfo.setCompleted();
-        }
-        catch(Exception e) {
-            System.out.println("An error occurred");
-            System.out.println(e.getMessage());
-        }
+
+        JSONObject generalJson = performGeneralRequest(playerNick);
+        System.out.println(generalJson);
+        updateGeneralProfile(generalJson, playerInfo);
+        JSONObject statsJson = performStatsRequest(playerNick);
+        System.out.println(statsJson);
+        updateStatsProfile(statsJson, playerInfo);
+
         return playerInfo;
     }
 

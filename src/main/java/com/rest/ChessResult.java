@@ -43,14 +43,23 @@ public class ChessResult {
 
     private String errorsOccurred() {
         String errors = "";
-        if (!StaticData.firstPlayerInfo.isCompleted()) {
+        if (!StaticData.firstPlayerFinish) {
             errors = errors + "An error occurred and data for user " +
                     StaticData.firstPlayerInfo.getNickname() + " may be incomplete.</br>";
         }
-        if (!StaticData.secondPlayerInfo.isCompleted()) {
+        if (!StaticData.secondPlayerFinish) {
             errors = errors + "An error occurred and data for user " +
                     StaticData.secondPlayerInfo.getNickname() + " may be incomplete.</br>";
         }
+        if (!StaticData.firstGamesFinish) {
+            errors = errors + "An error occurred and games for user " +
+                    StaticData.firstPlayerInfo.getNickname() + " may be incomplete.</br>";
+        }
+        if (!StaticData.firstGamesFinish) {
+            errors = errors + "An error occurred and games for user " +
+                    StaticData.firstPlayerInfo.getNickname() + " may be incomplete.</br>";
+        }
+
         return errors;
     }
 

@@ -21,15 +21,24 @@ public class RequestThread extends Thread {
 
     @Override
     public void run() {
-        PlayerInfo playerInfo = this.requester.getPlayerInfo(playerNick);
-        List<GameInfo> gamesInfo = this.requester.getGamesInfo(playerNick, gamesNumber);
-        if (playerNumber == 1) {
-            StaticData.firstPlayerInfo = playerInfo;
-            StaticData.firstGamesInfo = gamesInfo;
+        try {
+            PlayerInfo playerInfo = this.requester.getPlayerInfo(playerNick);
+            if (playerNumber == 1) {
+                StaticData.firstPlayerInfo = playerInfo;
+                StaticData.firstPlayerFinish = true;
+            } else {
+                StaticData.secondPlayerInfo = playerInfo;
+                StaticData.secondPlayerFinish = true;
+            }
+            List<GameInfo> gamesInfo = this.requester.getGamesInfo(playerNick, gamesNumber);
+            if (playerNumber == 1) {
+                StaticData.firstGamesInfo = gamesInfo;
+                StaticData.firstGamesFinish = true;
+            } else {
+                StaticData.secondGamesInfo = gamesInfo;
+                StaticData.secondGamesFinish = true;
+            }
         }
-        else {
-            StaticData.secondPlayerInfo = playerInfo;
-            StaticData.secondGamesInfo = gamesInfo;
-        }
+        catch (Exception ignored) {}
     }
 }

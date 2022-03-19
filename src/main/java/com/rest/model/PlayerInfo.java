@@ -12,7 +12,6 @@ public class PlayerInfo {
     private int blitzRanking;
     private int rapidRanking;
     private boolean isOnline;
-    private boolean completed = false;
 
     public PlayerInfo() {}
 
@@ -53,10 +52,6 @@ public class PlayerInfo {
 
     public void setLastOnlineDate(long creationDateSeconds) {
         this.lastOnlineDate = new Date(creationDateSeconds);
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public void setUrl(String url) {
@@ -105,13 +100,5 @@ public class PlayerInfo {
 
     public String getUrl() {
         return url;
-    }
-
-    public void setCompleted() {
-        this.completed = true;
-    }
-
-    public boolean isCompleted() {
-        return this.completed;
     }
 }

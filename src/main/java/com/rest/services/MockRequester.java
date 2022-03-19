@@ -19,7 +19,6 @@ public class MockRequester implements Requester {
         playerInfo.setCreationDate(1523304606613L);
         playerInfo.setLastOnlineDate(1523404606613L);
         playerInfo.setOnline(false);
-        playerInfo.setCompleted();
         return playerInfo;
     }
 

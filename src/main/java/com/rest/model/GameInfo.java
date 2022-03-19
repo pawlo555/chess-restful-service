@@ -13,17 +13,46 @@ public class GameInfo {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("White: ")
-                .append(whitePlayerNick)
-                .append(" ")
-                .append(result)
-                .append(" ")
-                .append("Black: ")
-                .append(blackPlayerNick)
-                .append(" ")
-                .append(gameURL);
-        return builder.toString();
+        return "White: " +
+                whitePlayerNick +
+                " " +
+                result +
+                " " +
+                "Black: " +
+                blackPlayerNick +
+                " " +
+                gameURL;
     }
 
+    public String getBlackPlayerNick() {
+        return blackPlayerNick;
+    }
+
+    public String getGameURL() {
+        return gameURL;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public String getWhitePlayerNick() {
+        return whitePlayerNick;
+    }
+
+    public void setBlackPlayerNick(String blackPlayerNick) {
+        this.blackPlayerNick = blackPlayerNick;
+    }
+
+    public void setGameURL(String gameURL) {
+        this.gameURL = gameURL;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public void setWhitePlayerNick(String whitePlayerNick) {
+        this.whitePlayerNick = whitePlayerNick;
+    }
 }

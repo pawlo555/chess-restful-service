@@ -1,5 +1,7 @@
 package com.rest;
 
+import com.rest.model.GameInfo;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -11,7 +13,7 @@ public class ChessResult {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public String createHTML() {
-        return "<html> <title> Results </title>"
+        return "<html> <title> Results: </title>"
                 + "<body>" +
                 "<h1>" + "Results" + "</h1>" +
                 errorsOccurred() +
@@ -27,6 +29,9 @@ public class ChessResult {
                 getNumberOfPlayedGames() +
                 getCreationDate() + getLastOnline() +
                 getOnlineStatus() +
+                "</table>" +
+                "<h2> Games: </h2> <br> <table>" +
+                loadGames() +
                 "</table>" +
                 "<p>" +
                 StaticData.firstPlayerInfo +
@@ -119,5 +124,31 @@ public class ChessResult {
                 "<td>" + StaticData.firstPlayerInfo.isOnline() + "</td>" +
                 "<td>" + StaticData.secondPlayerInfo.isOnline() + "</td>" +
                 "</tr>";
+    }
+
+    private String loadGames() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<tr>" +
+                "<th scope=\"col\"> White </th>" +
+                "<th scope=\"col\"> Result </th>" +
+                "<th scope=\"col\"> Black </th>" +
+                "<th scope=\"col\"> Link </th>" +
+                "</tr>");
+        for (GameInfo gameInfo: StaticData.firstGamesInfo) {
+            builder.append(loadGame(gameInfo));
+        }
+        for (GameInfo gameInfo: StaticData.secondGamesInfo) {
+            builder.append(loadGame(gameInfo));
+        }
+        return builder.toString();
+    }
+
+    private String loadGame(GameInfo gameInfo) {
+        return "<tr>" +
+                "<td>" + gameInfo.getWhitePlayerNick() + "</td>" +
+                "<td>" + gameInfo.getResult() + "</td>" +
+                "<td>" + gameInfo.getBlackPlayerNick() + "</td>" +
+                "<td> <a href=\"" + gameInfo.getGameURL() + "\">" +" link </a></td>" +
+                "<tr>";
     }
 }

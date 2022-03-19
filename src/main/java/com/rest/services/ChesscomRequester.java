@@ -1,5 +1,6 @@
 package com.rest.services;
 
+import com.rest.model.GameInfo;
 import com.rest.model.PlayerInfo;
 import org.json.JSONObject;
 
@@ -9,6 +10,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
+import java.util.List;
 
 public class ChesscomRequester implements Requester {
     private final static int ONLINE_TIME = 300000;
@@ -32,6 +34,11 @@ public class ChesscomRequester implements Requester {
             System.out.println(e.getMessage());
         }
         return playerInfo;
+    }
+
+    @Override
+    public List<GameInfo> getGamesInfo(String playerNick, int numberOfGames) {
+        return null;
     }
 
     private JSONObject performGeneralRequest(String playerNick) {

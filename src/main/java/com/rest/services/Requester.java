@@ -8,5 +8,5 @@ import java.util.List;
 public interface Requester {
 
     PlayerInfo getPlayerInfo(String playerNick);
-    //List<GameInfo> getGamesInfo();
+    List<GameInfo> getGamesInfo(String playerNick, int numberOfGames);
 }

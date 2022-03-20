@@ -33,10 +33,6 @@ public class ChessResult {
                 "<h2> Games: </h2> <br> <table>" +
                 loadGames() +
                 "</table>" +
-                "<p>" +
-                StaticData.firstPlayerInfo +
-                "</p>" +
-                StaticData.secondPlayerInfo +
                 "</body>" +
                 "</html> ";
     }
